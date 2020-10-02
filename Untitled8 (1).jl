@@ -136,15 +136,15 @@ function solve(
             
                 # compute price at a=a_i, {m-1,m}={m-1_j,m_k} and profits            
                 
-                if j=1 #non-exporter
+                if j<=1 #non-exporter
                     
                 p = (1/z[i])*(ϵ/(ϵ-1))
-                π = (p^{1-ϵ}-p^{-ϵ}/z[i])
+                π = (p^(1-ϵ)-p^(-ϵ))/z[i]
                         
                         else #exporter
                         
-                p = (1/z[i])*(ϵ/(ϵ-1))*((1+ξ^{-ϵ}*τ^{-ϵ})/(1+ξ^{1-ϵ}*τ^{-ϵ}))
-                π = (p^{1-ϵ}+p^{1-ϵ}*ξ^{1-ϵ}*τ^{-ϵ}-(p^{-ϵ}+((p*ξ)^{-ϵ}*τ^{-ϵ}))/z[i]) 
+                p = (1/z[i])*(ϵ/(ϵ-1))*((1+ξ^(-ϵ)*τ^(-ϵ))/(1+ξ^(1-ϵ)*τ^(-ϵ)))
+                π = p^(1-ϵ)+p^(1-ϵ)*ξ^(1-ϵ)*τ^(-ϵ)-(p^(-ϵ)+((p*ξ)^(-ϵ)*τ^(-ϵ))/z[i]) 
             
                 end
                     
@@ -241,7 +241,7 @@ function solve(
 
 
 
-    # return grid, policy, and VF
+    # return grid, policy, and VF (this is a matrix)
 
     return V, policy_m, z
 
@@ -251,28 +251,30 @@ end
 
 
 
+
+
 #tobe completed
 # run the solve() function, pass the grid you've created and all other parameters
 
-#VFI = solve(
+VFI = solve(
 
                 # grid returned by the create_grid function
 
- #               k_grid,
+                k_grid,
 
                 # model parameters
 
-  #              0.98, 2, 0.5, 1,
+                0.98, 4, 1.2, 1.1,
 
                 # VFI tolerance (set to be tiny when running)
 
-   #             10^(-6),
+                10^(-6),
 
                 # max VFI iterations (to prevent the loop from running forever if something is broken), set to a large integer
 
-    #            1000
+                1000
 
-     #       )
+            )
 
 
 
