@@ -55,94 +55,7 @@ p_z_i = stationary_distributions(a)
 p_z= hcat(p_z_i...)' #probabilities
 z = unique(a_t) #states
 
-sum(((p_z').*V[:,length(prob_0):length(f_grid)]).*(prob_1'))
 
-for i=1:length(z)
-            
-            
-            # iterate over f (columns):
-            
-            for j=1:length(f_grid)
-                
-                
-            # initialize a vector to hold values of the objective function at m={0,1}
-
-            rhs_value = zeros(Float64, (length(z), 1+length(f0_grid)+length(f1_grid)))
-            
-                # compute price at a=a_i, {m-1,m}={m-1_j,m_k} and profits            
-                
-                if j=1 #non-exporter
-                    
-                p = ((1/z[i])*(ϵ/(ϵ-1))
-                π = (p^{1-ϵ}-p^{-ϵ}/z[i])
-                        
-                        else #exporter
-                        
-                p = ((1/z[i])*(ϵ/(ϵ-1))*((1+ξ^{-ϵ}*τ^{-ϵ})/(1+ξ^{1-ϵ}*τ^{-ϵ}))
-                π = (p^{1-ϵ}+p^{1-ϵ}*ξ^{1-ϵ}*τ^{-ϵ}-(p^{-ϵ}+((p*ξ)^{-ϵ}*τ^{-ϵ}))/z[i]) 
-            
-                end
-                    
-              
-                # Calculate expected value of not exporting at t+1:
-                        
-                E_0 = sum((p_z').*V[:,1])
-                
-                        
-                            if j<=1 #non-exporter at t
-                                
-                                E_1 = sum(((p_z').*V[:,2:length(prob_0)]).*(prob_0[1:length(prob_0)-1]'))
-                                
-                                if E_0 > E_1
-                                    
-                                rhs_value[i,j] = π - f_grid[j] + β*E_0 #decides not to export at t+1
-                                
-                                policy_m[i,j] = 0
-                    
-                                
-                                else
-                                    
-                                    rhs_value[i,j] = π - f_grid[j] + β*E_1 #decides to export at t+1
-                                    
-                                    policy_m[i,j] = 1
-                                    
-                                end
-                
-              
-                            else #exporter at t
-                                
-                        
-                                E_1 = sum(((p_z').*V[:,length(prob_0):length(f_grid)]).*(prob_1'))
-                                
-                                
-                                if E_0 > E_1
-                                    
-                                rhs_value[i,j] = π - f_grid[j] + β*E_0 #decides not to export at t+1
-                                
-                                policy_m[i,j] = 0
-                                    
-                                else
-                                    
-                                rhs_value[i,j] = π - f_grid[j] + β*E_1 #decides to export at t+1
-                                
-                                policy_m[i,j] = 1
-                                    
-                                end
-                                
-                            
-                                
-                                end                
-            
-                            
-
-
-            # update v_prime at i,j with this value
-
-            V_prime[i,j] = rhs_value[i,j]
-                    
-                    
-                    
-                        end
 
 ## function that does the VFI
 
@@ -338,18 +251,7 @@ end
 
 
 
-
-
-
-
-
-
-# run the create_grid() function
-
-#k_grid = create_grid(0.5, 1.1, 100)
-
-
-
+#tobe completed
 # run the solve() function, pass the grid you've created and all other parameters
 
 #VFI = solve(
